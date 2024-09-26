@@ -35,12 +35,7 @@ Here's a walkthrough of implemented required features:
 
 ### Loom Walkthrough:
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;">
-    <iframe src="https://www.loom.com/embed/1a8029c5601c433887b98b52a951c945?sid=d59342d7-191d-422b-a0d9-b36afe2bee33" 
-            frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen 
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-    </iframe>
-</div>
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/1a8029c5601c433887b98b52a951c945?sid=7b63eb56-c2b4-44de-900b-7506f7fbeb5f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### GIF Walkthrough:
 
