@@ -44,7 +44,7 @@ Here's a walkthrough of implemented required features:
 
 ### GIF Walkthrough:
 
-<img src="https://i.imgur.com/gSiEljC.gif" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
+<img src="https://i.imgur.com/Qmq18Wg.gif" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
 
 ## Notes
 
