@@ -29,6 +29,18 @@ body.dark {
   align-items: center;
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-container img {
+  max-width: 150px; /* Adjust the size of the logo */
+  height: auto;
+}
+
 h1 {
   font-size: 2rem;
   margin-bottom: 20px;
@@ -119,7 +131,7 @@ body.dark button:hover:not(:disabled) {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 120px; /* Ensure width for better alignment */
+  width: 120px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -175,32 +187,21 @@ body.dark button:hover:not(:disabled) {
   transform: rotateY(180deg);
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
+body.dark .card-front,
+body.dark .card-back {
+  background-color: #555;
+  color: white;
+}
 
-  .app-container {
-    padding: 10px;
-  }
+.difficulty-legend {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
-  .button-container {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  button {
-    width: 90%;
-    margin: 10px 0;
-  }
-
-  .card {
-    font-size: 18px;
-  }
-
-  .choice-btn {
-    font-size: 16px;
-    max-width: 90%;
-  }
+.difficulty-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

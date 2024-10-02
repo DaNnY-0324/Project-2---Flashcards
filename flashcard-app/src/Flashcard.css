@@ -1,12 +1,52 @@
-/* Flashcard container with 3D perspective */
-.card {
-  perspective: 1000px;
-  width: 450px; /* Larger width */
-  height: 350px; /* Larger height */
-  margin: 30px auto;
+/* Easy - Green background */
+.green-card .card-front,
+.green-card .card-back {
+  background-color: #4caf50;
+  color: black;
 }
 
-/* Inner card container for flip animation */
+/* Medium - Yellow background */
+.yellow-card .card-front,
+.yellow-card .card-back {
+  background-color: #ffeb3b;
+  color: black;
+}
+
+/* Hard - Red background */
+.red-card .card-front,
+.red-card .card-back {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Dark theme adjustments */
+body.dark .green-card .card-front,
+body.dark .green-card .card-back {
+  background-color: #357a38;
+  color: white;
+}
+
+body.dark .yellow-card .card-front,
+body.dark .yellow-card .card-back {
+  background-color: #b2a429;
+  color: white;
+}
+
+body.dark .red-card .card-front,
+body.dark .red-card .card-back {
+  background-color: #c62828;
+  color: white;
+}
+
+/* General card styling */
+.card {
+  perspective: 1000px;
+  width: 450px;
+  height: auto;
+  margin: 30px auto;
+  transition: background-color 0.3s ease;
+}
+
 .card-inner {
   position: relative;
   width: 100%;
@@ -15,7 +55,6 @@
   transform-style: preserve-3d;
 }
 
-/* Front and back of the card */
 .card-front,
 .card-back {
   position: absolute;
@@ -23,63 +62,77 @@
   height: 100%;
   backface-visibility: hidden;
   display: flex;
-  flex-direction: column; /* Arrange content vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  font-size: 24px; /* Larger font size */
   border-radius: 10px;
-  background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme for card */
-body.dark .card-front,
-body.dark .card-back {
-  background-color: #444;
-  color: white;
+.card-back {
+  transform: rotateY(180deg);
 }
 
-/* Styling for the question */
-.question {
-  margin-bottom: 20px; /* Add space between question and choices */
-  font-weight: bold;
-  text-align: center;
+.card-front {
+  transform: rotateY(0deg);
 }
 
-/* Answer choices container */
-.choices {
+/* Image container */
+.image-container {
+  margin-top: 20px;
+  width: 100%;
   display: flex;
-  flex-direction: column; /* Stack choices vertically */
   justify-content: center;
-  align-items: center;
 }
 
-/* Answer choice buttons */
+.image-container img {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Image and choices side by side in quiz mode */
+.image-and-choices {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.image-and-choices .choices {
+  flex: 1;
+}
+
+.image-and-choices .image-container {
+  flex: 1;
+  max-width: 150px;
+}
+
+/* Styling for the choice buttons */
 .choice-btn {
   display: block;
   margin: 10px 0;
-  padding: 15px 20px; /* Larger padding for bigger buttons */
+  padding: 12px 20px;
   background-color: #d3d3d3;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px; /* Larger text for buttons */
-  width: 100%; /* Full width for better text fit */
-  max-width: 300px; /* Set a max width so buttons don't get too wide */
-  text-align: center; /* Horizontally center the text */
-  line-height: normal; /* Ensure proper line height for centering */
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflow if text is too long */
-  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
-/* Hover effect for answer buttons */
 .choice-btn:hover {
   background-color: #bbb;
 }
 
-/* Dark theme for choice buttons */
 body.dark .choice-btn {
   background-color: #666;
   color: white;
@@ -87,4 +140,28 @@ body.dark .choice-btn {
 
 body.dark .choice-btn:hover {
   background-color: #888;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 300px;
+  }
+
+  .choice-btn {
+    font-size: 16px;
+    max-width: 90%;
+  }
+
+  .image-and-choices {
+    flex-direction: column;
+  }
+
+  .image-and-choices .image-container {
+    max-width: 100%;
+    margin-top: 20px;
+  }
 }
