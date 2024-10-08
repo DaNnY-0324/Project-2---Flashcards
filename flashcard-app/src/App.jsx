@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FlashcardList from "./components/FlashcardList";
 import ThemeSlider from "./components/ThemeSlider";
 import "./App.css";
-import logo from "../public/images/question1image.png";
+import logo from "./images/question1image.png";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -11,9 +11,14 @@ function App() {
   const [showIncorrect, setShowIncorrect] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [quizMode, setQuizMode] = useState(true);
+  const [testMode, setTestMode] = useState(false);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [allowNext, setAllowNext] = useState(true);
+  const [feedback, setFeedback] = useState("");
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
 
   const flashcards = [
-    // Easy Questions
     {
       id: 1,
       question: "What is the primary purpose of React?",
@@ -340,8 +345,16 @@ function App() {
     }
   }, [darkMode]);
 
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  const shuffleFlashcards = () => {
+    const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
+    setIndex(0);
+    setPreviousIndexes([]);
+    setShowAnswer(false);
+    setShowIncorrect(false);
+    setFeedback("");
+    setUserAnswer("");
   };
 
   const showNextFlashcard = () => {
@@ -353,6 +366,7 @@ function App() {
     }
     setShowAnswer(false);
     setShowIncorrect(false);
+    setFeedback("");
   };
 
   const showPreviousFlashcard = () => {
@@ -360,23 +374,53 @@ function App() {
       const lastIndex = previousIndexes.pop();
       setIndex(lastIndex);
       setPreviousIndexes(previousIndexes);
+    } else {
+      setIndex(flashcards.length - 1);
     }
     setShowAnswer(false);
     setShowIncorrect(false);
+    setFeedback("");
+  };
+
+  const handleCorrectAnswer = () => {
+    setShowAnswer(true);
+    setCurrentStreak(currentStreak + 1);
+    setLongestStreak(Math.max(longestStreak, currentStreak + 1));
+  };
+
+  const handleIncorrectAnswer = () => {
+    setShowIncorrect(true);
+    setCurrentStreak(0);
+    setTimeout(() => {
+      setShowIncorrect(false);
+    }, 1500);
   };
 
   const handleCheckAnswer = (userAnswer) => {
-    if (userAnswer === flashcards[index].answer) {
-      setShowAnswer(true);
-      setTimeout(() => {
-        showNextFlashcard();
-      }, 1000);
+    if (userAnswer.toLowerCase() === flashcards[index].answer.toLowerCase()) {
+      setFeedback("Correct! Click Next.");
+      handleCorrectAnswer();
+      setAllowNext(true);
     } else {
-      setShowIncorrect(true);
-      setTimeout(() => {
-        setShowIncorrect(false);
-      }, 1000);
+      setFeedback("Incorrect, Please try again.");
+      handleIncorrectAnswer();
     }
+  };
+
+  const handleQuizAnswer = (choice) => {
+    if (choice.toLowerCase() === flashcards[index].answer.toLowerCase()) {
+      handleCorrectAnswer();
+      setFeedback("Correct! Click Next.");
+      setShowAnswer(true);
+    } else {
+      handleIncorrectAnswer();
+      setFeedback("Incorrect!");
+    }
+  };
+
+  const handleTestSubmit = () => {
+    handleCheckAnswer(userAnswer);
+    setUserAnswer("");
   };
 
   return (
@@ -388,17 +432,35 @@ function App() {
 
       <div className="mode-selector">
         <button
-          onClick={() => setQuizMode(true)}
+          onClick={() => {
+            setQuizMode(true);
+            setTestMode(false);
+            setAllowNext(true);
+          }}
           className={quizMode ? "active" : ""}
         >
           Quiz
         </button>
         <ThemeSlider toggleTheme={toggleTheme} darkMode={darkMode} />
         <button
-          onClick={() => setQuizMode(false)}
+          onClick={() => {
+            setQuizMode(false);
+            setTestMode(false);
+            setAllowNext(true);
+          }}
           className={!quizMode ? "active" : ""}
         >
           Flashcards
+        </button>
+        <button
+          onClick={() => {
+            setTestMode(true);
+            setQuizMode(false);
+            setAllowNext(false);
+          }}
+          className={testMode ? "active" : ""}
+        >
+          Test Mode
         </button>
       </div>
 
@@ -406,30 +468,58 @@ function App() {
         <div className="incorrect-card">Incorrect!</div>
       ) : showAnswer && quizMode ? (
         <div className="answer-card">
-          <p>Correct! The answer is {flashcards[index].answer}</p>
+          <p>{feedback}</p>
         </div>
       ) : (
         <FlashcardList
           flashcard={flashcards[index]}
-          checkAnswer={quizMode ? handleCheckAnswer : null}
+          checkAnswer={quizMode ? handleQuizAnswer : null}
           quizMode={quizMode}
           showAnswer={showAnswer}
         />
       )}
 
+      {testMode && !showAnswer && (
+        <div className="test-mode">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "20px",
+            }}
+          >
+            <input
+              type="text"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              placeholder="Type your answer"
+              style={{ marginBottom: "10px", width: "60%" }}
+            />
+            <button
+              onClick={handleTestSubmit}
+              style={{ alignSelf: "flex-start" }}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="button-container">
-        <button
-          onClick={showPreviousFlashcard}
-          disabled={previousIndexes.length === 0}
-        >
-          Previous
-        </button>
-        <button
-          onClick={showNextFlashcard}
-          disabled={!quizMode && showAnswer === false}
-        >
+        <button onClick={showPreviousFlashcard}>Previous</button>
+        <button onClick={shuffleFlashcards}>Shuffle</button>
+        <button onClick={showNextFlashcard} disabled={testMode && !allowNext}>
           Next
         </button>
+      </div>
+
+      <div className="streak-counter">
+        <p>Current Streak: {currentStreak}</p>
+        <p>Longest Streak: {longestStreak}</p>
+      </div>
+
+      <div className="feedback-message">
+        <p>{feedback}</p>
       </div>
 
       <div className="difficulty-legend">

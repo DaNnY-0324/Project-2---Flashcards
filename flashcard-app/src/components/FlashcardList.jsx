@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "../Flashcard.css";
 
-const FlashcardList = ({ flashcard, checkAnswer, quizMode, showAnswer }) => {
+const FlashcardList = ({ flashcard, quizMode, showAnswer }) => {
+  const [flip, setFlip] = useState(false);
+
   const getDifficultyColor = () => {
     switch (flashcard.difficulty) {
       case "easy":
@@ -14,24 +17,27 @@ const FlashcardList = ({ flashcard, checkAnswer, quizMode, showAnswer }) => {
     }
   };
 
+  const handleFlip = () => setFlip(!flip);
+
   return (
     <div
-      className={`card ${getDifficultyColor()} ${showAnswer ? "flip" : ""}`}
-      onClick={!quizMode ? checkAnswer : null}
+      className={`card ${getDifficultyColor()} ${flip ? "flip" : ""}`}
+      onClick={handleFlip}
     >
       <div className="card-inner">
         <div className="card-front">
           <div className="question">
             <p>{flashcard.question}</p>
+            {flashcard.image && (
+              <div className="image-container">
+                <img src={flashcard.image} alt={flashcard.question} />
+              </div>
+            )}
           </div>
           {quizMode && (
             <div className="choices">
               {flashcard.choices.map((choice) => (
-                <button
-                  key={choice}
-                  onClick={() => checkAnswer(choice)}
-                  className="choice-btn"
-                >
+                <button key={choice} className="choice-btn">
                   {choice}
                 </button>
               ))}
@@ -39,9 +45,7 @@ const FlashcardList = ({ flashcard, checkAnswer, quizMode, showAnswer }) => {
           )}
         </div>
         <div className="card-back">
-          <div className="answer">
-            <p>{flashcard.answer}</p>
-          </div>
+          <p>{flashcard.answer}</p>
         </div>
       </div>
     </div>
