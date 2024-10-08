@@ -39,7 +39,7 @@ Here's a walkthrough of implemented required features:
 
 ### GIF Walkthrough:
 
-<img src="https://i.imgur.com/gSiEljC.gif" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
+<img src="https://i.imgur.com/agUK4L7.gif)" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
 
 ## Notes
 
