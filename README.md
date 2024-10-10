@@ -41,11 +41,11 @@ Here's a walkthrough of the implemented required and additional features:
 
 ### Loom Walkthrough:
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/1a8029c5601c433887b98b52a951c945?sid=7b63eb56-c2b4-44de-900b-7506f7fbeb5f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/ab7e04479c224442a2119d83c06acf97?sid=10da10d9-5995-4515-a02a-88c03b37842e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ### GIF Walkthrough:
 
-<img src="https://i.imgur.com/agUK4L7.gif)" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
+https://i.imgur.com/SUVFuz3.gif
 
 ## Notes
 
