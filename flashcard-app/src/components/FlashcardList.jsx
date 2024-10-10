@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "../Flashcard.css";
 
-const FlashcardList = ({ flashcard, quizMode, showAnswer }) => {
+const FlashcardList = ({
+  flashcard,
+  checkAnswer,
+  quizMode,
+  testMode,
+  showAnswer,
+}) => {
   const [flip, setFlip] = useState(false);
 
   const getDifficultyColor = () => {
@@ -17,12 +23,18 @@ const FlashcardList = ({ flashcard, quizMode, showAnswer }) => {
     }
   };
 
-  const handleFlip = () => setFlip(!flip);
+  // Prevent flipping if in test mode and the answer is not yet correct
+  const handleFlip = () => {
+    if (!testMode || showAnswer) {
+      // Only allow flip if not in test mode or if answer is correct
+      setFlip(!flip);
+    }
+  };
 
   return (
     <div
       className={`card ${getDifficultyColor()} ${flip ? "flip" : ""}`}
-      onClick={handleFlip}
+      onClick={handleFlip} // Only allow flipping based on mode and answer correctness
     >
       <div className="card-inner">
         <div className="card-front">
@@ -37,7 +49,11 @@ const FlashcardList = ({ flashcard, quizMode, showAnswer }) => {
           {quizMode && (
             <div className="choices">
               {flashcard.choices.map((choice) => (
-                <button key={choice} className="choice-btn">
+                <button
+                  key={choice}
+                  className="choice-btn"
+                  onClick={() => checkAnswer(choice)}
+                >
                   {choice}
                 </button>
               ))}

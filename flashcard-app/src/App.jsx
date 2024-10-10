@@ -9,7 +9,7 @@ function App() {
   const [index, setIndex] = useState(0);
   const [previousIndexes, setPreviousIndexes] = useState([]);
   const [showIncorrect, setShowIncorrect] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false); // Prevent flip until correct
   const [quizMode, setQuizMode] = useState(true);
   const [testMode, setTestMode] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
@@ -17,6 +17,7 @@ function App() {
   const [feedback, setFeedback] = useState("");
   const [currentStreak, setCurrentStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
+  const [masteredCards, setMasteredCards] = useState([]);
 
   const flashcards = [
     {
@@ -347,14 +348,29 @@ function App() {
 
   const toggleTheme = () => setDarkMode(!darkMode);
 
+  // Random shuffle that maintains different difficulty levels
   const shuffleFlashcards = () => {
-    const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
+    const availableFlashcards = flashcards.filter(
+      (card) => !masteredCards.includes(card.id)
+    );
+
+    const shuffled = [...availableFlashcards].sort(() => Math.random() - 0.5);
+
+    const shuffledByDifficulty = shuffled.sort((a, b) => {
+      const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
+      return (
+        Math.random() - 0.5 ||
+        difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]
+      );
+    });
+
     setIndex(0);
     setPreviousIndexes([]);
     setShowAnswer(false);
     setShowIncorrect(false);
     setFeedback("");
     setUserAnswer("");
+    setFlashcards(shuffledByDifficulty);
   };
 
   const showNextFlashcard = () => {
@@ -383,24 +399,31 @@ function App() {
   };
 
   const handleCorrectAnswer = () => {
-    setShowAnswer(true);
+    setShowAnswer(true); // Card will flip to show the answer only after correct answer
     setCurrentStreak(currentStreak + 1);
     setLongestStreak(Math.max(longestStreak, currentStreak + 1));
+    setAllowNext(true); // Allow the user to proceed to the next card
   };
 
   const handleIncorrectAnswer = () => {
     setShowIncorrect(true);
-    setCurrentStreak(0);
+    setCurrentStreak(0); // Reset streak on incorrect answer
     setTimeout(() => {
       setShowIncorrect(false);
     }, 1500);
   };
 
+  // Partial correctness check (use localeCompare)
   const handleCheckAnswer = (userAnswer) => {
-    if (userAnswer.toLowerCase() === flashcards[index].answer.toLowerCase()) {
+    if (
+      userAnswer
+        .toLowerCase()
+        .localeCompare(flashcards[index].answer.toLowerCase(), undefined, {
+          sensitivity: "base",
+        }) === 0
+    ) {
       setFeedback("Correct! Click Next.");
       handleCorrectAnswer();
-      setAllowNext(true);
     } else {
       setFeedback("Incorrect, Please try again.");
       handleIncorrectAnswer();
@@ -411,7 +434,7 @@ function App() {
     if (choice.toLowerCase() === flashcards[index].answer.toLowerCase()) {
       handleCorrectAnswer();
       setFeedback("Correct! Click Next.");
-      setShowAnswer(true);
+      setShowAnswer(true); // Card flips after correct answer
     } else {
       handleIncorrectAnswer();
       setFeedback("Incorrect!");
@@ -421,6 +444,11 @@ function App() {
   const handleTestSubmit = () => {
     handleCheckAnswer(userAnswer);
     setUserAnswer("");
+  };
+
+  // Mark card as mastered
+  const markAsMastered = (cardId) => {
+    setMasteredCards([...masteredCards, cardId]);
   };
 
   return (
@@ -475,6 +503,7 @@ function App() {
           flashcard={flashcards[index]}
           checkAnswer={quizMode ? handleQuizAnswer : null}
           quizMode={quizMode}
+          testMode={testMode} // Pass testMode to FlashcardList
           showAnswer={showAnswer}
         />
       )}
@@ -510,6 +539,9 @@ function App() {
         <button onClick={shuffleFlashcards}>Shuffle</button>
         <button onClick={showNextFlashcard} disabled={testMode && !allowNext}>
           Next
+        </button>
+        <button onClick={() => markAsMastered(flashcards[index].id)}>
+          Mark as Mastered
         </button>
       </div>
 
