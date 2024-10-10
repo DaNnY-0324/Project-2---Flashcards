@@ -2,9 +2,9 @@
 
 Submitted by: **Danny Nguyen**
 
-This web app: **A React-based Flashcard and Quiz application that allows users to toggle between two modes: Quiz mode (answering multiple choice questions with feedback) and Flashcard mode (flipping cards to reveal the answer). It includes animations, theme switching, and responsive design.**
+This web app: **A React-based Flashcard and Quiz application with multiple modes: Quiz mode (answering multiple-choice questions with feedback), Flashcard mode (flipping cards to reveal answers), and Test mode (input answers manually). The app includes shuffle functionality, a streak counter, animations, theme switching, and responsive design.**
 
-Time spent: **12.5** hours spent in total
+Time spent: **15** hours spent in total
 
 ## Required Features
 
@@ -18,20 +18,26 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [x] Cards contains images in addition to or in place of text
-- [x] Cards have different visual styles such as color based on their category
+- [x] Cards contain images in addition to or in place of text
+- [x] Cards have different visual styles, such as color based on their category
   - [x] _Green for correct answer, Red for incorrect answer_
 
-The following **additional** features are implemented:
+## New Features
 
-- [x] **A theme switcher slider that toggles between light and dark modes using emojis (🌞 / 🌜)**
-- [x] **Animations added for flipping cards in both Quiz and Flashcard mode**
-- [x] **The app supports two modes: Quiz mode with feedback, and Flashcard mode where clicking reveals the answer**
+- [x] **Test Mode**: Users input their answers manually, and the card only flips upon submitting the correct answer. Incorrect answers show a red card with the message "Incorrect, try again" before flipping back to the question.
+- [x] **Quiz Mode Enhancements**: Cards only flip when an answer is selected. Incorrect answers flip the card to a red state and flip back to the question automatically.
+- [x] **Shuffle Functionality**: A shuffle button randomizes the order of the flashcards.
+- [x] **Streak Counter**: Tracks the user's current and longest streak of correct answers. The streak resets when an incorrect answer is given.
+
+## Additional Features
+
+- [x] **Theme switcher slider that toggles between light and dark modes using emojis (🌞 / 🌜)**
+- [x] **Animations added for flipping cards in all modes (Quiz, Flashcard, and Test)**
 - [x] **Responsive design for mobile devices**
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features:
+Here's a walkthrough of the implemented required and additional features:
 
 ### Loom Walkthrough:
 
@@ -39,15 +45,16 @@ Here's a walkthrough of implemented required features:
 
 ### GIF Walkthrough:
 
-<img src="https://i.imgur.com/gSiEljC.gif" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
+<img src="https://i.imgur.com/agUK4L7.gif)" title="Video Walkthrough" width="500" alt="GIF Walkthrough" />
 
 ## Notes
 
-Describe any challenges encountered while building the app:
+### Challenges
 
-- **Handling state management for different modes (Quiz vs Flashcard)**
-- **Creating a smooth card flip animation**
-- **Ensuring the theme switcher was properly aligned with the buttons**
+- **Managing state for multiple modes**: Implementing smooth transitions between Quiz, Flashcard, and Test modes required careful state management.
+- **Card flipping animation**: Ensuring the card flips at the right time based on user input for different modes was a challenge.
+- **Implementing streak counter**: Accurately tracking the user's current and longest streak of correct answers while resetting the counter on incorrect answers.
+- **Shuffle Functionality**: Ensuring the shuffle function randomized the flashcards without disrupting the app's state and user flow.
 
 ## License
 
@@ -64,3 +71,4 @@ Describe any challenges encountered while building the app:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+****
