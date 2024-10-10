@@ -1,60 +1,96 @@
-# Web Development Project 2 - _React Flashcards and Quiz App_
+# React Flashcards and Quiz App
 
 Submitted by: **Danny Nguyen**
 
-This web app: **A React-based Flashcard and Quiz application with multiple modes: Quiz mode (answering multiple-choice questions with feedback), Flashcard mode (flipping cards to reveal answers), and Test mode (input answers manually). The app includes shuffle functionality, a streak counter, animations, theme switching, and responsive design.**
+This web app is a **React-based Flashcard and Quiz application** featuring multiple interactive modes: Quiz mode (multiple-choice questions with feedback), Flashcard mode (flipping cards to reveal answers), and Test mode (manually input answers). The app includes shuffle functionality, a streak counter, animations, theme switching, and responsive design for mobile devices.
 
-Time spent: **15** hours spent in total
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Required Features](#required-features)
+- [Optional Features](#optional-features)
+- [New Features](#new-features)
+- [Additional Features](#additional-features)
+- [Video Walkthrough](#video-walkthrough)
+- [Challenges](#challenges)
+- [License](#license)
+
+---
+
+## Project Overview
+
+**Time spent:** 15 hours in total
+
+This project is a fully responsive React web application designed to simulate an interactive flashcard system, where users can engage in different study modes (Quiz, Flashcard, Test) while keeping track of their progress with animations and custom visual feedback.
+
+---
 
 ## Required Features
 
-The following **required** functionality is completed:
+The following **required** functionality has been implemented:
 
-- [x] **The title of the card set and some information about it, such as a short description and the total number of cards are displayed**
-- [x] **A single card at a time is displayed, only showing one of the components of the information pair**
-- [x] **A list of card pairs is created**
-- [x] **Clicking on the card shows the corresponding component of the information pair**
-- [x] **Clicking the next button displays a random new card**
+- [x] The title of the card set and some information about it, such as a short description and the total number of cards, are displayed.
+- [x] A single card at a time is displayed, showing only one component of the card's information pair.
+- [x] A list of card pairs is created.
+- [x] Clicking on the card shows the corresponding component of the information pair.
+- [x] Clicking the next button displays a random new card.
 
-The following **optional** features are implemented:
+---
 
-- [x] Cards contain images in addition to or in place of text
-- [x] Cards have different visual styles, such as color based on their category
-  - [x] _Green for correct answer, Red for incorrect answer_
+## Optional Features
+
+In addition to the required features, the following **optional** features have been implemented:
+
+- [x] Cards contain images in addition to or in place of text.
+- [x] Cards have different visual styles based on their category:
+  - Green for a correct answer.
+  - Red for an incorrect answer.
+
+---
 
 ## New Features
 
-- [x] **Test Mode**: Users input their answers manually, and the card only flips upon submitting the correct answer. Incorrect answers show a red card with the message "Incorrect, try again" before flipping back to the question.
-- [x] **Quiz Mode Enhancements**: Cards only flip when an answer is selected. Incorrect answers flip the card to a red state and flip back to the question automatically.
-- [x] **Shuffle Functionality**: A shuffle button randomizes the order of the flashcards.
-- [x] **Streak Counter**: Tracks the user's current and longest streak of correct answers. The streak resets when an incorrect answer is given.
+Here are additional features and enhancements implemented in the app:
+
+- **Test Mode**: Users input answers manually. The card only flips upon submitting the correct answer. Incorrect answers show a red card with the message "Incorrect, try again" before flipping back to the question.
+- **Quiz Mode Enhancements**: Cards only flip when an answer is selected. Incorrect answers flip the card to a red state and then flip back to the question automatically.
+- **Shuffle Functionality**: A shuffle button randomizes the order of the flashcards.
+- **Streak Counter**: Tracks the user's current and longest streak of correct answers. The streak resets when an incorrect answer is given.
+
+---
 
 ## Additional Features
 
-- [x] **Theme switcher slider that toggles between light and dark modes using emojis (🌞 / 🌜)**
-- [x] **Animations added for flipping cards in all modes (Quiz, Flashcard, and Test)**
-- [x] **Responsive design for mobile devices**
+- [x] **Theme Switcher**: A slider toggles between light and dark modes using emojis (🌞 / 🌜).
+- [x] **Animations**: Added smooth animations for flipping cards in all modes (Quiz, Flashcard, and Test).
+- [x] **Responsive Design**: The app is fully responsive and works seamlessly on mobile devices.
+
+---
 
 ## Video Walkthrough
 
-Here's a walkthrough of the implemented required and additional features:
+Here’s a walkthrough demonstrating the required and additional features:
 
 ### Loom Walkthrough:
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/ab7e04479c224442a2119d83c06acf97?sid=10da10d9-5995-4515-a02a-88c03b37842e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+[Watch the walkthrough](https://www.loom.com/embed/ab7e04479c224442a2119d83c06acf97?sid=10da10d9-5995-4515-a02a-88c03b37842e)
 
 ### GIF Walkthrough:
+![GIF Walkthrough](https://i.imgur.com/SUVFuz3.gif)
 
-https://i.imgur.com/SUVFuz3.gif
+---
 
-## Notes
+## Challenges
 
-### Challenges
+Some challenges I encountered while working on this project:
 
-- **Managing state for multiple modes**: Implementing smooth transitions between Quiz, Flashcard, and Test modes required careful state management.
-- **Card flipping animation**: Ensuring the card flips at the right time based on user input for different modes was a challenge.
-- **Implementing streak counter**: Accurately tracking the user's current and longest streak of correct answers while resetting the counter on incorrect answers.
-- **Shuffle Functionality**: Ensuring the shuffle function randomized the flashcards without disrupting the app's state and user flow.
+- **Managing state across multiple modes**: Transitioning smoothly between Quiz, Flashcard, and Test modes required careful state management.
+- **Card flipping animation**: Ensuring that the card flips at the correct time based on user input in different modes was tricky.
+- **Implementing the streak counter**: Accurately tracking the user's current and longest streak of correct answers and resetting the counter on incorrect answers.
+- **Shuffle Functionality**: Making sure the shuffle function randomized the cards without disrupting the user’s progress or the app's state.
+
+---
 
 ## License
 
